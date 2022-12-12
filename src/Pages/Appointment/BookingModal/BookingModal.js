@@ -2,7 +2,7 @@ import React from "react";
 import { format } from 'date-fns';
 
 const BookingModal = ({treatment,selectedDate}) => {
-    const {name} = treatment;
+    const {name, slots} = treatment;
   return (
     <>
       <input type="checkbox" id="booking-modal" className="modal-toggle" />
@@ -22,8 +22,13 @@ const BookingModal = ({treatment,selectedDate}) => {
             use Wikipedia for free!
           </p>
           <form className="grid grid-cols-1 gap-2 mt-4">
-            <input type="text" value={format(selectedDate, 'PP')} className="input input-bordered w-full" />
-            <input type="text" placeholder="Type here" className="input input-bordered w-full" />
+            <input type="text" disabled value={format(selectedDate, 'PP')} className="input input-bordered w-full" />
+            <select className="select select-bordered w-full">
+                
+                {
+                    slots.map(slot =><option value ={slot}>{slot}</option>)
+                }
+            </select>
             <input type="text" placeholder="Type here" className="input input-bordered w-full" />
             <input type="text" placeholder="Type here" className="input input-bordered w-full" />
             <input type="text" placeholder="Type here" className="input input-bordered w-full" />
