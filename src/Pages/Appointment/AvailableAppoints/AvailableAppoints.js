@@ -12,7 +12,7 @@ const AvailableAppoints = ({selectedDate}) => {
     return (
         <section className ='mt-16'>
             <p className='text-center text-secondary font-bold '>Available appointment on {format(selectedDate, 'PP')}</p>
-            <div>
+            <div className='grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
                 {
                     appointmentOptions.map(option => <AppointmentOption
                     key={option._id}
