@@ -1,6 +1,7 @@
 import React from "react";
 
-const BookingModal = () => {
+const BookingModal = ({treatment}) => {
+    const {name} = treatment;
   return (
     <>
       <input type="checkbox" id="booking-modal" className="modal-toggle" />
@@ -13,7 +14,7 @@ const BookingModal = () => {
             ✕
           </label>
           <h3 className="text-lg font-bold">
-            Congratulations random Internet user!
+            {name}
           </h3>
           <p className="py-4">
             You've been selected for a chance to get one year of subscription to
