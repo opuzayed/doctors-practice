@@ -3,6 +3,14 @@ import { format } from 'date-fns';
 
 const BookingModal = ({treatment,selectedDate}) => {
     const {name, slots} = treatment;
+    const handleBooking = event => {
+            event.preventDefault();
+            const form = event.target;
+            const slot = form.slot.value;
+            const name = form.name.value;
+            const email = form.email.value;
+            const phone = form.phone.value;
+    }
   return (
     <>
       <input type="checkbox" id="booking-modal" className="modal-toggle" />
@@ -21,17 +29,16 @@ const BookingModal = ({treatment,selectedDate}) => {
             You've been selected for a chance to get one year of subscription to
             use Wikipedia for free!
           </p>
-          <form className="grid grid-cols-1 gap-2 mt-4">
+          <form onSubmit = {handleBooking} className="grid grid-cols-1 gap-2 mt-4">
             <input type="text" disabled value={format(selectedDate, 'PP')} className="input input-bordered w-full" />
-            <select className="select select-bordered w-full">
-                
+            <select name='slot' className="select select-bordered w-full">
                 {
-                    slots.map(slot =><option value ={slot}>{slot}</option>)
+                    slots.map((slot,i) =><option value = {slot} key={i}>{slot}</option>)
                 }
             </select>
-            <input type="text" placeholder="Type here" className="input input-bordered w-full" />
-            <input type="text" placeholder="Type here" className="input input-bordered w-full" />
-            <input type="text" placeholder="Type here" className="input input-bordered w-full" />
+            <input name='name' type="text" placeholder="Your Name" className="input input-bordered w-full" />
+            <input name = 'email' type="text" placeholder="Email Address" className="input input-bordered w-full" />
+            <input name = 'phone' type="text" placeholder="Phone Number" className="input input-bordered w-full" />
             <br />
             <input type="submit" className="btn btn-accent w-full" value="Submit" />
           </form>
