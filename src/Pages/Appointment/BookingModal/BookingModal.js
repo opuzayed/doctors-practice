@@ -15,6 +15,7 @@ const BookingModal = ({treatment,setTreatment,selectedDate}) => {
                 appointmentDate : format(selectedDate, 'PP'),
                 treatment:name,
                 patientName:name,
+                slot,
                 email,
                 phone
             }
