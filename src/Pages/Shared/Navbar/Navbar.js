@@ -1,9 +1,17 @@
 import React, { useContext } from "react";
+import { Button } from "react-day-picker";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Contexts/AuthProvider";
 
 const Navbar = () => {
-  const {user} = useContext(AuthContext);
+  const {user,logOut} = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logOut()
+    .then(()=> {})
+    .catch(error => console.error(error));
+  }
+
   const menuItems = 
     <React.Fragment>
       <li>
@@ -19,7 +27,7 @@ const Navbar = () => {
         <Link to='/about'>About</Link>
       </li>
       {user?.uid ?
-        <li><Link to='/login'>SignOut</Link></li>
+        <li><Button onClick={handleLogOut}>SignOut</Button></li>
         :
         <li><Link to='/login'>Login</Link></li>
       }
