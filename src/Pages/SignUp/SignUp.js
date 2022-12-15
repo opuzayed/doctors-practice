@@ -1,10 +1,8 @@
-
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useContext, useState } from 'react';
 import { AuthContext } from './../../Contexts/AuthProvider';
 import { toast } from 'react-hot-toast';
-
 
 const SignUp = () => {
 
