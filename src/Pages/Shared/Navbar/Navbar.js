@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { Button } from "react-day-picker";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Contexts/AuthProvider";
 
@@ -21,13 +20,13 @@ const Navbar = () => {
         <Link to='/appointment'>Appointment</Link>
       </li>
       <li>
-        <Link to='/reviews'>Reviews</Link>
-      </li>
-      <li>
         <Link to='/about'>About</Link>
       </li>
       {user?.uid ?
-        <li><Button onClick={handleLogOut}>SignOut</Button></li>
+        <>
+        <li><Link to='/dashboard'>Dashboard</Link></li>
+        <li><button onClick={handleLogOut}>SignOut</button></li>
+        </>
         :
         <li><Link to='/login'>Login</Link></li>
       }

@@ -36,7 +36,7 @@ const Login = () => {
           </div>
           <div className="form-control w-full max-w-xs">
             <label className="label"> <span className="label-text">Password</span></label>
-            <input type="text" {...register("password", { required: "Password is required", minLength: { value: 6, message: "password must be six character or longer"}})} className="input input-bordered w-full max-w-xs"/>
+            <input type="password" {...register("password", { required: "Password is required", minLength: { value: 6, message: "password must be six character or longer"}})} className="input input-bordered w-full max-w-xs"/>
             {errors.password && <p className="text-error-content">{errors.password?.message}</p>}
             <label className="label"> <span className="label-text">Forget Password?</span></label>
           </div>
