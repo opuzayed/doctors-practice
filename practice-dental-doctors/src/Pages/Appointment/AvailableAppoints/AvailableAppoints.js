@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { format } from "date-fns";
 import AppointmentOption from "./AppointmentOption";
 import BookingModal from "../BookingModal/BookingModal";
