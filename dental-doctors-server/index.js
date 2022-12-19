@@ -39,7 +39,8 @@ async function run(){
       app.post('/bookings', async (req, res) => {
         const booking = req.body;
         const query = {
-          appointmentDate : booking.appointmentDate
+          appointmentDate : booking.appointmentDate,
+          treatment : booking.treatment
         }
         const alreadyBooked = await bookingsCollection.find(query).toArray();
         if(alreadyBooked.length){
