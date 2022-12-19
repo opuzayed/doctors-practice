@@ -30,7 +30,7 @@ async function run(){
           const bookedSlot = optionBooked.map(book => book.slot);
           const remainingSlots = option.slots.filter(slot => !bookedSlot.includes(slot));
           option.slots = remainingSlots;
-          console.log(date, option.name, remainingSlots.length);
+          // console.log(date, option.name, remainingSlots.length);
         })
 
         res.send(options);
@@ -38,6 +38,14 @@ async function run(){
 
       app.post('/bookings', async (req, res) => {
         const booking = req.body;
+        const query = {
+          appointmentDate : booking.appointmentDate
+        }
+        const alreadyBooked = await bookingsCollection.find(query).toArray();
+        if(alreadyBooked.length){
+          const message = `You have already booked on ${booking.appointmentDate}`;
+          return res.send({acknowledged : false, message});
+        }
         const result = await bookingsCollection.insertOne(booking);
         res.send(result);
       })
