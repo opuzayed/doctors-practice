@@ -28,7 +28,9 @@ async function run(){
         options.forEach(option => {
           const optionBooked = alreadyBooked.filter(book => book.treatment === option.name);
           const bookedSlot = optionBooked.map(book => book.slot);
-          console.log(date, option.name, bookedSlot);
+          const remainingSlots = option.slots.filter(slot => !bookedSlot.includes(slot));
+          option.slots = remainingSlots;
+          console.log(date, option.name, remainingSlots.length);
         })
 
         res.send(options);
