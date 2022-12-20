@@ -36,10 +36,18 @@ async function run(){
         res.send(options);
       });
 
+      app.get('/bookings', async (req, res) => {
+              const email = req.query.email;
+              const query = { email : email };
+              const bookings = await bookingsCollection(query).toArray();
+              res.send(bookings);
+      })
+
       app.post('/bookings', async (req, res) => {
         const booking = req.body;
         const query = {
           appointmentDate : booking.appointmentDate,
+          email : booking.email,
           treatment : booking.treatment
         }
         const alreadyBooked = await bookingsCollection.find(query).toArray();
