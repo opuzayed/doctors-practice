@@ -32,7 +32,7 @@ const MyAppointment = () => {
                 <tbody>
                 {
                     bookings.map(( booking , i ) => <tr>
-                        <th>{i}</th>
+                        <th>{i+1}</th>
                         <td>Cy Ganderton</td>
                         <td>Quality Control Specialistssy</td>
                         <td>Blue</td>
