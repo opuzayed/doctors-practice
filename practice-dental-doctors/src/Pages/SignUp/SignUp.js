@@ -7,7 +7,7 @@ import { toast } from 'react-hot-toast';
 const SignUp = () => {
 
     const {register, handleSubmit, formState: { errors }} = useForm();
-    const {createUser,updateUser} = useContext(AuthContext);
+    const {createUser, updateUser} = useContext(AuthContext);
     const [signUpError, setSignUpError] = useState('');
     const navigate = useNavigate();
 
@@ -24,7 +24,7 @@ const SignUp = () => {
           }
           updateUser(userInfo)
           .then(()=> {
-            navigate('/');
+            saveUser(data.name, data.email);
           })
           .catch(err => console.error(err));
         })
@@ -32,6 +32,21 @@ const SignUp = () => {
           console.error(error);
           setSignUpError(error.message);
         });
+    }
+    const saveUser = (name, email) => {
+         const user = {name, email};
+         fetch('http://localhost:5000/users', {
+          method : 'POST',
+          headers : {
+            'content-type' : 'application/json',
+          },
+          body:JSON.stringify(user)
+         }) 
+         .then(res => res.json())
+         .then(data => {
+          console.log('save user', data);
+          navigate('/');
+         });
     }
     return (
         <div className="h-[800px] flex justify-center items-center">
