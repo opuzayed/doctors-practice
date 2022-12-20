@@ -18,6 +18,7 @@ async function run(){
     try{
       const appointmentOptionCollection = client.db("dentalDoctors").collection("appointmentOptions");
       const bookingsCollection = client.db("dentalDoctors").collection("bookings");
+      const usersCollection = client.db("dentalDoctors").collection("users");
 
       app.get('/appointmentOptions', async(req,res)=> {
         const date = req.query.date;
@@ -39,7 +40,7 @@ async function run(){
       app.get('/bookings', async (req, res) => {
               const email = req.query.email;
               const query = { email : email };
-              const bookings = await bookingsCollection(query).toArray();
+              const bookings = await bookingsCollection.find(query).toArray();
               res.send(bookings);
       })
 
@@ -57,7 +58,13 @@ async function run(){
         }
         const result = await bookingsCollection.insertOne(booking);
         res.send(result);
-      })
+      });
+
+      app.post('/users', async(req, res) => {
+              const user = req.body;
+              const result = await usersCollection.insertOne(user);
+              res.send(result);
+      });
 
     }
     finally{
