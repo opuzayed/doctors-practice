@@ -1,12 +1,23 @@
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
 const AddDoctor = () => {
     const {register, handleSubmit, formState: { errors }} = useForm();
-    
+
+    const {data : specialities, isLoading} = useQuery({
+            queryKey : ['specialty'],
+            queryFn : async () => {
+                const res = await fetch('http://localhost:5000/appointmentSpecialty');
+                const data = await res.json();
+                return data;
+            }
+    });
+
     const handleAddDoctor = data => {
             console.log(data);
     }
+    
     return (
         <div className='w-96 p-7'>
            <h2 className="text-4xl">Add a Doctor</h2>
