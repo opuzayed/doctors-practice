@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import Loading from '../../Shared/Loading/Loading';
 
 const AddDoctor = () => {
     const {register, handleSubmit, formState: { errors }} = useForm();
@@ -17,7 +18,12 @@ const AddDoctor = () => {
     const handleAddDoctor = data => {
             console.log(data);
     }
-    
+
+    if(isLoading)
+    {
+        return <Loading></Loading>
+    }
+
     return (
         <div className='w-96 p-7'>
            <h2 className="text-4xl">Add a Doctor</h2>
@@ -35,10 +41,14 @@ const AddDoctor = () => {
           <div className="form-control w-full max-w-xs">
             <label className="label"> <span className="label-text">Speciality</span></label>
             <select className="select select-ghost w-full max-w-xs">
-                <option disabled selected>Pick the Specialized</option>
-                <option>Svelte</option>
-                <option>Vue</option>
-                <option>React</option>
+                <option disabled selected>Please select Specialized</option>
+                {
+                    specialities.map(specialty => <option
+                        key={specialty._id}
+                        value={specialty.name}
+                    >{specialty.name}</option> )
+                }
+               
             </select>
           </div>
           <input className="btn btn-accent w-full mt-4" value='Add Doctor' type="submit" />
