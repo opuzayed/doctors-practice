@@ -40,7 +40,7 @@ const AddDoctor = () => {
           </div>
           <div className="form-control w-full max-w-xs">
             <label className="label"> <span className="label-text">Speciality</span></label>
-            <select className="select select-ghost w-full max-w-xs">
+            <select className="select input-bordered select-ghost w-full max-w-xs">
                 <option disabled selected>Please select Specialized</option>
                 {
                     specialities.map(specialty => <option
@@ -48,11 +48,9 @@ const AddDoctor = () => {
                         value={specialty.name}
                     >{specialty.name}</option> )
                 }
-               
             </select>
           </div>
           <input className="btn btn-accent w-full mt-4" value='Add Doctor' type="submit" />
-          
         </form> 
         </div>
     );
