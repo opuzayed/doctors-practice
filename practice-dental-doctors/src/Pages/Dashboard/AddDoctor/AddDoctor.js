@@ -31,6 +31,12 @@ const AddDoctor = () => {
             .then(imgData => {
                 if(imgData.success){
                     console.log(imgData.data.url);
+                    const doctor = {
+                        name : data.name,
+                        email : data.email,
+                        specialty : data.specialty,
+                        image : imgData.data.url
+                    }
                 }
             })
     }
