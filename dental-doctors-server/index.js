@@ -54,6 +54,12 @@ async function run(){
         res.send(options);
       });
 
+      app.get('/appointmentSpecialty', async(req,res) => {
+        const query = {};
+        const result = await appointmentOptionCollection.find(query).project({name : 1}).toArray();
+        res.send(result);
+      });
+
       app.get('/bookings', verifyJWT, async (req, res) => {
               const email = req.query.email;
               const decodedEmail = req.decoded.email;
@@ -97,6 +103,13 @@ async function run(){
         const users = await usersCollection.find(query).toArray();
         res.send(users);
       });
+
+      app.get('/users/admin/:email', async (req, res) => {
+        const email = req.params.email;
+        const query = {email};
+        const user = await usersCollection.findOne(query);
+        res.send({isAdmin:user?.role === 'admin'});
+      })
 
       app.post('/users', async(req, res) => {
               const user = req.body;
