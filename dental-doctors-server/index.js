@@ -36,6 +36,8 @@ async function run(){
       const appointmentOptionCollection = client.db("dentalDoctors").collection("appointmentOptions");
       const bookingsCollection = client.db("dentalDoctors").collection("bookings");
       const usersCollection = client.db("dentalDoctors").collection("users");
+      const doctorsCollection = client.db("dentalDoctors").collection("doctors");
+       
 
       app.get('/appointmentOptions', async(req,res)=> {
         const date = req.query.date;
@@ -134,6 +136,12 @@ async function run(){
     };
     const result = await usersCollection.updateOne( filter, updateDoc, options );
     res.send(result);
+    });
+
+    app.post('/doctors', async(req, res) => {
+      const doctor = req.body;
+      const result = await doctorsCollection.insertOne(doctor);
+      res.send(result);
     });
 
     }
