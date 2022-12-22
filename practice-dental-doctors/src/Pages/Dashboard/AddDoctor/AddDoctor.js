@@ -3,8 +3,9 @@ import { useForm } from 'react-hook-form';
 
 const AddDoctor = () => {
     const {register, handleSubmit, formState: { errors }} = useForm();
+    
     const handleAddDoctor = data => {
-
+            console.log(data);
     }
     return (
         <div className='w-96 p-7'>
@@ -21,14 +22,15 @@ const AddDoctor = () => {
             {errors.email && <p className='text-red-500'>{errors.email?.message}</p>}
           </div>
           <div className="form-control w-full max-w-xs">
-            <label className="label"> <span className="label-text">Password</span></label>
-            <input type="password" {...register("password",{ required: 'Password is required',
-            minLength: { value: 6, message: "Password must be six character or long" },
-            pattern:{value:/(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/, message:'password must be strong'}
-            })} className="input input-bordered w-full max-w-xs"/>
-            {errors.password && <p className='text-red-500'>{errors.password?.message}</p>}
+            <label className="label"> <span className="label-text">Speciality</span></label>
+            <select className="select select-ghost w-full max-w-xs">
+                <option disabled selected>Pick the Specialized</option>
+                <option>Svelte</option>
+                <option>Vue</option>
+                <option>React</option>
+            </select>
           </div>
-          <input className="btn btn-accent w-full mt-4" value='Sign Up' type="submit" />
+          <input className="btn btn-accent w-full mt-4" value='Add Doctor' type="submit" />
           
         </form> 
         </div>
