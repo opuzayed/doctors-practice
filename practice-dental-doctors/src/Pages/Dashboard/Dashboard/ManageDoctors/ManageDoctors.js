@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
+import { toast } from 'react-hot-toast';
 import ConfirmationModal from '../../../Shared/ConfirmationModal/ConfirmationModal';
 import Loading from '../../../Shared/Loading/Loading';
 
@@ -39,8 +40,10 @@ const ManageDoctors = () => {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data);
-            refetch();
+            if(data.deletedCount>0){
+                refetch();
+                toast.success(`Doctor ${doctor.name} deleted successfully`);
+            }
         })
     }
 
