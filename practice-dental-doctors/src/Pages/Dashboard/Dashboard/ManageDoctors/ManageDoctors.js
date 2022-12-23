@@ -11,7 +11,16 @@ const ManageDoctors = () => {
     }
 
     const handleDeleteDoctor = doctor => {
-        console.log(doctor);
+        fetch(`http://localhost:5000/doctors/${doctor._id}`,{
+            method : 'DELETE',
+            headers : {
+                authorization : `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+        })
     }
 
     const {data : doctors, isLoading} = useQuery({
