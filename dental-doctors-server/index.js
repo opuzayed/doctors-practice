@@ -38,6 +38,10 @@ async function run(){
       const usersCollection = client.db("dentalDoctors").collection("users");
       const doctorsCollection = client.db("dentalDoctors").collection("doctors");
        
+      const verifyAdmin = (req, res, next) => {
+        console.log('inside verify Admin', req.decoded.email);
+        next();
+      }
 
       app.get('/appointmentOptions', async(req,res)=> {
         const date = req.query.date;
@@ -138,7 +142,7 @@ async function run(){
     res.send(result);
     });
 
-    app.get('/doctors', verifyJWT, async(req, res) => {
+    app.get('/doctors', verifyJWT, verifyAdmin, async(req, res) => {
       const query = {};
       const doctors = await doctorsCollection.find(query).toArray();
       res.send(doctors);
